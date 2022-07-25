@@ -1,0 +1,29 @@
+#!/bin/env bash
+
+check_dep() {
+  if ! type -p $1 &> /dev/null 
+  then
+      echo "\"$1\" is required to run this script."
+      exit
+  fi
+}
+
+check_dep "od"
+check_dep "sed"
+check_dep "tr"
+
+print_help() {
+    echo ""
+    echo "Dump file binary as 8bit unsigned decimal."
+    echo ""
+    echo "Usage: bits INPUT_FILE"
+}
+
+if [ $# -lt 1 ]; then
+    print_help
+    exit 0
+fi
+
+od -A n -t u1 $1 | tr -s ' \n' ',' | sed 's/^[,]//' | sed 's/[,]$//'
+
+

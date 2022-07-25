@@ -1,0 +1,24 @@
+#!/bin/env bash
+
+check_dep() {
+  if ! type -p $1 &> /dev/null 
+  then
+      echo "\"$1\" is required to run this script."
+      exit
+  fi
+}
+
+check_dep "python"
+
+print_help() {
+    echo "Start HTTP server that servers files in DIR on port 5001"
+    echo ""
+    echo "Usage: http-server DIR"
+}
+
+if [ $# -lt 1 ]; then
+    print_help
+    exit 0
+fi
+
+python -m 'http.server' --directory $1 5001

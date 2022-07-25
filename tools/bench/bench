@@ -1,0 +1,24 @@
+#!/bin/env bash
+
+check_dep() {
+  if ! type -p $1 &> /dev/null 
+  then
+      echo "\"$1\" is required to run this script."
+      exit
+  fi
+}
+
+check_dep "bombardier"
+
+print_help() {
+    echo "Run HTTP bench against URL"
+    echo ""
+    echo "Usage: bench URL"
+}
+
+if [ $# -lt 1 ]; then
+    print_help
+    exit 0
+fi
+
+bombardier -c 200 -n 500000 -l $1

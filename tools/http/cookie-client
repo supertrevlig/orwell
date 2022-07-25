@@ -1,0 +1,64 @@
+#!/bin/env bash
+
+check_dep() {
+  if ! type -p $1 &> /dev/null 
+  then
+      echo "\"$1\" is required to run this script."
+      exit
+  fi
+}
+
+check_dep "column"
+check_dep "curl"
+check_dep "sed"
+
+print_help() {
+    echo "See cookies set by server"
+    echo ""
+    echo "Usage: cookie-client ACTION [ARG...]"
+    echo ""
+    echo "ACTIONS:"
+    echo "  get     URL   issue GET-request then list cookies"
+    echo "  list          list cookies."
+    echo "  delete        delete cookies."
+}
+
+if [ $# -lt 1 ]; then
+    print_help
+    exit 0
+fi
+
+print_line() {
+    printf '%.s─' $(seq 1 $(tput cols))
+}
+
+COOKIE_JAR="/tmp/cookie_jar"
+
+touch $COOKIE_JAR
+
+case "$1" in
+    delete)
+        rm -f $COOKIE_JAR && touch $COOKIE_JAR
+        exit 0
+        ;;
+    list)
+        cat $COOKIE_JAR | grep -v -e '^# ' -e '^$' |\
+        column \
+            --table \
+            --output-separator '  |  ' \
+            --table-columns 'domain,subdomains,path,HTTPS only,expires at,name,value' \
+            --table-order 'name,value,path,domain,subdomains,HTTPS only,expires at' |\
+        sed "1i$(print_line)" |\
+        sed "3i$(print_line)"
+        exit 0
+        ;;
+    get)
+        curl -s --cookie-jar $COOKIE_JAR --cookie $COOKIE_JAR $2
+        $0 list
+        exit 0
+        ;;
+    *)
+        echo "Unknown option: $*"
+        print_help
+        ;;
+esac

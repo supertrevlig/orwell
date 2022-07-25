@@ -1,0 +1,25 @@
+#!/bin/env bash
+
+check_dep() {
+  if ! type -p $1 &> /dev/null 
+  then
+      echo "\"$1\" is required to run this script."
+      exit
+  fi
+}
+
+check_dep "magick"
+
+print_help() {
+    echo ""
+    echo "Create a 1x1 transparent gif."
+    echo ""
+    echo "Usage: make-pixel OUTPUT_FILE"
+}
+
+if [ $# -lt 1 ]; then
+    print_help
+    exit 0
+fi
+
+magick -size 1x1 xc:transparent $1
