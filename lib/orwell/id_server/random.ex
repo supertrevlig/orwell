@@ -11,8 +11,8 @@ defmodule Orwell.IDServer.Random do
   end
 
   @impl Orwell.IDServer
-  def next_id(pid) do
-    Agent.get_and_update(pid, fn id -> {id, random_id()} end)
+  def next_id(sid) do
+    Agent.get_and_update(sid, fn id -> {id, random_id()} end)
   end
 
   def random_id() do

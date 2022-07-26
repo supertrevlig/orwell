@@ -4,7 +4,7 @@ defmodule Orwell.LogFormat do
     "|timestamp|id|referrer|"
   end
 
-  @spec format_line(DateTime.t(), String.t(), String.t()) :: String.t()
+  @spec format_line(String.t(), String.t(), String.t()) :: String.t()
   def format_line(timestamp, id, referrer) do
     "|#{timestamp}|#{id}|#{referrer}|"
   end

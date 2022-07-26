@@ -11,8 +11,8 @@ defmodule Orwell.IDServer.Sequential do
   end
 
   @impl Orwell.IDServer
-  def next_id(pid) do
-    Agent.get_and_update(pid, fn id -> {id, id + 1} end)
+  def next_id(sid) do
+    Agent.get_and_update(sid, fn id -> {id, id + 1} end)
     |> Integer.to_string()
   end
 end

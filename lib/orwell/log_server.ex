@@ -13,10 +13,9 @@ defmodule Orwell.LogServer do
     GenServer.start_link(__MODULE__, [log_file], name: name)
   end
 
-  @spec log(pid :: pid(), timestamp :: DateTime.t(), id :: String.t(), referrer :: String.t()) ::
-          :ok
-  def log(pid, timestamp, id, referrer) do
-    GenServer.cast(pid, {:log, timestamp, id, referrer})
+  @spec log(pid | atom, DateTime.t(), String.t(), String.t()) :: :ok
+  def log(sid, timestamp, id, referrer) do
+    GenServer.cast(sid, {:log, timestamp, id, referrer})
   end
 
   # Callbacks
