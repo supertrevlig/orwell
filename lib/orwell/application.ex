@@ -5,7 +5,7 @@ defmodule Orwell.Application do
 
   use Application
 
-  @id_server Application.fetch_env!(:orwell, :id_server)
+  @id_server Application.compile_env(:orwell, :id_server)
 
   def start(_type, _args) do
     # List all child processes to be supervised

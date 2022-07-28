@@ -3,7 +3,7 @@ defmodule Orwell.LogServer do
 
   use GenServer
 
-  @log_writer Application.fetch_env!(:orwell, :log_writer)
+  @log_writer Application.compile_env(:orwell, :log_writer)
 
   alias Orwell.LogFormat
 

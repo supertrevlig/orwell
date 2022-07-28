@@ -2,7 +2,7 @@ defmodule Orwell.Impl do
   @moduledoc false
   @behaviour Orwell
 
-  @id_server Application.fetch_env!(:orwell, :id_server)
+  @id_server Application.compile_env(:orwell, :id_server)
 
   @impl Orwell
   def next_id do

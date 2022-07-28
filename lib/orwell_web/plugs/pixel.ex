@@ -3,7 +3,7 @@ defmodule OrwellWeb.Plugs.Pixel do
 
   import Plug.Conn
 
-  @orwell Application.fetch_env!(:orwell, :orwell)
+  @orwell Application.compile_env(:orwell, :orwell)
 
   @gif <<71, 73, 70, 56, 57, 97, 1, 0, 1, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 33, 249, 4, 1, 0, 0, 0,
          0, 33, 255, 11, 73, 109, 97, 103, 101, 77, 97, 103, 105, 99, 107, 14, 103, 97, 109, 109,
