@@ -1,4 +1,6 @@
 defmodule Orwell.LogFormat do
+  @moduledoc false
+
   @spec format_header() :: String.t()
   def format_header() do
     "|timestamp|id|referrer|"

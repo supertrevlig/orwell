@@ -1,5 +1,6 @@
 defmodule Orwell.IDServer.Random do
   @moduledoc false
+
   @behaviour Orwell.IDServer
 
   use Agent

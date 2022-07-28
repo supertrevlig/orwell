@@ -1,4 +1,6 @@
 defmodule OrwellCli.Main do
+  @moduledoc false
+
   alias Orwell.LogFormat
 
   def help() do

@@ -1,4 +1,6 @@
 defmodule OrwellWeb.Plugs.Pixel do
+  @moduledoc false
+
   import Plug.Conn
 
   @orwell Application.fetch_env!(:orwell, :orwell)

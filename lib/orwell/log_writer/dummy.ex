@@ -1,4 +1,6 @@
 defmodule Orwell.LogWriter.Dummy do
+  @moduledoc false
+
   @behaviour Orwell.LogWriter
 
   @impl Orwell.LogWriter
